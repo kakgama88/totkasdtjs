@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Informasi Ruangan Ujian - GAMA'88 X FUNTASTICJS</title>
+  <title>Gama'88 X FuntasticJS</title>
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Informasi Ruangan Ujian - GAMA'88 X FUNTASTICJS">
+  <meta property="og:description" content="Cek lokasi lantai, ruang ujian, kode QR presensi, dan unduh kartu peserta ujian.">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Varela+Round&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -61,12 +69,16 @@
       font-family: 'Arial Rounded MT Bold', 'Nunito', 'Varela Round', 'Helvetica Rounded', sans-serif;
     }
 
-    svg {
-      flex-shrink: 0;
+    svg { flex-shrink: 0; }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     body {
-      min-height: 100vh;
       background: var(--bg-gradient);
       color: var(--text-heading);
       display: flex;
@@ -77,7 +89,6 @@
       transition: background 0.35s ease, color 0.3s ease;
     }
 
-    /* STICKY TOP BAR */
     .sticky-topbar {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -90,7 +101,6 @@
       padding: 8px 16px;
       display: flex;
       justify-content: center;
-      transition: background 0.35s ease;
     }
 
     .sticky-topbar-inner {
@@ -111,14 +121,8 @@
       object-fit: contain;
       margin-right: auto;
       background: transparent !important;
-      transition: opacity 0.25s ease, filter 0.3s ease;
     }
 
-    body.dark-mode .sticky-logo-img {
-      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
-    }
-
-    /* TOMBOL MENGAMBANG WHATSAPP (BISA DIGESER) */
     .wa-floating-btn {
       position: fixed;
       right: 16px;
@@ -140,86 +144,26 @@
       touch-action: none;
       user-select: none;
       -webkit-user-select: none;
-      transition: transform 0.16s ease, box-shadow 0.2s ease;
-    }
-
-    .wa-floating-btn:hover {
-      transform: scale(1.06);
-      box-shadow: 0 14px 32px rgba(20, 83, 45, 0.42), inset 0 1.5px 1px rgba(255, 255, 255, 0.8);
     }
 
     .wa-floating-btn.is-dragging {
       cursor: grabbing;
       transform: scale(1.1);
       box-shadow: 0 18px 36px rgba(0, 0, 0, 0.38);
-      transition: none;
     }
 
     .wa-floating-badge {
       position: absolute;
-      top: -3px;
-      right: -3px;
-      width: 15px;
-      height: 15px;
+      top: -3px; right: -3px;
+      width: 15px; height: 15px;
       border-radius: 50%;
       background: #facc15;
       border: 2px solid #14532d;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
     }
 
-    /* BANNER KHUSUS JIKA DIBUKA DARI BROWSER INSTAGRAM / TIKTOK */
-    .inapp-browser-bar {
-      display: none;
-      width: 100%;
-      max-width: 460px;
-      padding: 10px 16px 0 16px;
-      z-index: 5;
-    }
-
-    .inapp-browser-box {
-      background: linear-gradient(135deg, #14532d 0%, #166534 100%);
-      border: 1.5px solid #fef08a;
-      border-radius: 16px;
-      padding: 10px 13px;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      box-shadow: 0 8px 20px rgba(20, 83, 45, 0.2);
-    }
-
-    .inapp-browser-text {
-      font-size: 11px;
-      line-height: 1.35;
-      color: #fef9c3;
-    }
-
-    .inapp-browser-text strong {
-      color: #ffffff;
-      display: block;
-      font-size: 12px;
-      margin-bottom: 2px;
-    }
-
-    .inapp-open-btn {
-      flex-shrink: 0;
-      background: #fef08a;
-      color: #14532d;
-      border: none;
-      border-radius: 999px;
-      padding: 7px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    /* SLIDER TEMA GELAP / TERANG ALA IOS */
     .ios-theme-switch {
       position: relative;
-      width: 60px;
-      height: 31px;
+      width: 60px; height: 31px;
       border-radius: 999px;
       border: 1.5px solid rgba(255, 255, 255, 0.65);
       background: linear-gradient(135deg, #fde047 0%, #22c55e 100%);
@@ -230,8 +174,6 @@
       cursor: pointer;
       flex-shrink: 0;
       margin-left: auto;
-      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(20, 83, 45, 0.14);
-      transition: background 0.35s ease;
     }
 
     body.dark-mode .ios-theme-switch {
@@ -239,7 +181,7 @@
       border-color: rgba(134, 239, 172, 0.45);
     }
 
-    .ios-switch-icon { width: 13px; height: 13px; color: #ffffff; z-index: 1; opacity: 0.92; }
+    .ios-switch-icon { width: 13px; height: 13px; color: #ffffff; z-index: 1; }
 
     .ios-switch-thumb {
       position: absolute;
@@ -252,7 +194,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 2px 7px rgba(0, 0, 0, 0.28);
-      transition: transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, color 0.3s ease;
+      transition: transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 2;
     }
 
@@ -268,283 +210,133 @@
     .orb-2 { width: 280px; height: 280px; background: #facc15; bottom: 8%; right: -80px; }
     .orb-3 { width: 240px; height: 240px; background: #22c55e; top: 44%; left: 26%; opacity: 0.28; }
 
-    /* POP-UP IKLAN POSTER UKURAN ASLI UTUH */
     .promo-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
+      position: fixed; inset: 0; z-index: 9999;
       background: rgba(10, 26, 17, 0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      display: none; align-items: center; justify-content: center; padding: 18px;
     }
 
     .promo-wrapper { position: relative; width: auto; max-width: 92vw; display: flex; flex-direction: column; align-items: center; }
-
     .promo-close-btn {
-      position: absolute;
-      top: -14px; right: -10px;
-      z-index: 20;
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      border: 2px solid #ffffff;
+      position: absolute; top: -14px; right: -10px; z-index: 20;
+      width: 36px; height: 36px; border-radius: 50%; border: 2px solid #ffffff;
       background: linear-gradient(135deg, #14532d 0%, #166534 100%);
-      color: #fef08a;
-      font-size: 22px;
-      font-weight: 700;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.38);
+      color: #fef08a; font-size: 22px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
-
     .promo-card {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      background: rgba(20, 83, 45, 0.94);
-      border: 1.5px solid rgba(254, 240, 138, 0.65);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 24px 52px rgba(0, 0, 0, 0.5);
+      position: relative; width: 100%; max-width: 420px;
+      background: rgba(20, 83, 45, 0.94); border: 1.5px solid rgba(254, 240, 138, 0.65);
+      border-radius: 24px; overflow: hidden; box-shadow: 0 24px 52px rgba(0, 0, 0, 0.5);
     }
-
     .promo-track { display: flex; align-items: center; transition: transform 0.38s cubic-bezier(0.25, 0.8, 0.25, 1); }
     .promo-slide { flex: 0 0 100%; width: 100%; display: flex; align-items: center; justify-content: center; }
     .promo-ig-frame { width: 100%; display: flex; align-items: center; justify-content: center; }
     .promo-ig-frame img { display: block; width: auto; height: auto; max-width: 100%; max-height: 74vh; object-fit: contain; }
-
     .promo-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255, 255, 255, 0.65);
-      background: rgba(20, 83, 45, 0.78);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.65); background: rgba(20, 83, 45, 0.78);
+      color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
-
     .promo-nav.prev { left: 10px; }
     .promo-nav.next { right: 10px; }
-
     .promo-footer-bar {
-      padding: 10px 14px;
-      background: rgba(10, 38, 20, 0.94);
+      padding: 10px 14px; background: rgba(10, 38, 20, 0.94);
       border-top: 1px solid rgba(255, 255, 255, 0.16);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
     }
-
     .promo-dots { display: flex; align-items: center; gap: 6px; }
-    .promo-dot { width: 8px; height: 8px; border-radius: 999px; border: none; background: rgba(255, 255, 255, 0.35); cursor: pointer; transition: all 0.25s ease; }
+    .promo-dot { width: 8px; height: 8px; border-radius: 999px; border: none; background: rgba(255, 255, 255, 0.35); cursor: pointer; }
     .promo-dot.active { width: 22px; background: #fef08a; }
     .promo-skip-text { background: rgba(254, 240, 138, 0.18); border: 1px solid rgba(254, 240, 138, 0.55); color: #fef08a; font-size: 11.5px; font-weight: 700; padding: 5px 13px; border-radius: 999px; cursor: pointer; }
 
     .inline-promo-section { margin-top: 16px; width: 100%; }
-    .inline-promo-label { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; color: var(--text-label); margin-bottom: 8px; letter-spacing: 0.4px; }
-    .inline-promo-card { position: relative; width: 100%; border-radius: 20px; overflow: hidden; border: 1.5px solid var(--card-border); background: rgba(20, 83, 45, 0.92); box-shadow: 0 10px 24px rgba(20, 83, 45, 0.14); }
+    .inline-promo-label { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; color: var(--text-label); margin-bottom: 8px; }
+    .inline-promo-card { position: relative; width: 100%; border-radius: 20px; overflow: hidden; border: 1.5px solid var(--card-border); background: rgba(20, 83, 45, 0.92); }
 
-    .photo-lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 16px; }
+    .photo-lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.85); display: none; align-items: center; justify-content: center; padding: 16px; }
     .photo-lightbox-box { background: #0f172a; border-radius: 20px; overflow: hidden; max-width: 92vw; border: 1.5px solid rgba(255, 255, 255, 0.35); }
     .photo-lightbox-box img { display: block; max-width: 100%; max-height: 76vh; object-fit: contain; }
     .photo-lightbox-caption { padding: 11px 14px; color: #fef08a; font-size: 13px; font-weight: 700; text-align: center; }
 
-    /* TAMPILAN 1: FORM PENCARIAN */
     #searchSection { position: relative; z-index: 1; width: 100%; max-width: 460px; padding: 14px 16px 0 16px; display: flex; flex-direction: column; }
-
     .search-card {
-      background: var(--card-glass);
-      backdrop-filter: blur(24px) saturate(190%);
-      -webkit-backdrop-filter: blur(24px) saturate(190%);
-      border: 1.5px solid var(--card-border);
-      border-bottom-color: var(--card-border-sub);
-      border-right-color: var(--card-border-sub);
-      border-radius: 26px;
-      overflow: hidden;
-      box-shadow: var(--card-shadow);
+      background: var(--card-glass); backdrop-filter: blur(24px) saturate(190%); -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1.5px solid var(--card-border); border-bottom-color: var(--card-border-sub); border-right-color: var(--card-border-sub);
+      border-radius: 26px; overflow: hidden; box-shadow: var(--card-shadow);
     }
-
     .hero-header {
       position: relative;
       background: linear-gradient(135deg, rgba(20, 83, 45, 0.94) 0%, rgba(21, 128, 61, 0.88) 55%, rgba(202, 138, 4, 0.9) 100%);
-      padding: 24px 20px;
-      text-align: center;
-      color: #ffffff;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.38);
-      overflow: hidden;
+      padding: 24px 20px; text-align: center; color: #ffffff; border-bottom: 1px solid rgba(255, 255, 255, 0.38);
     }
-
-    .hero-header::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -15%;
-      width: 130%; height: 100%;
-      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 70%);
-      pointer-events: none;
-    }
-
-    .hero-title { font-size: 19px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.16); }
+    .hero-title { font-size: 19px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
     .hero-subtitle { font-size: 12.5px; color: #fef9c3; }
     .search-body { padding: 20px; }
-
     .card-header-title { display: flex; align-items: center; gap: 10px; font-size: 14.5px; font-weight: 700; color: var(--text-heading); margin-bottom: 18px; }
-    .badge-icon-theme { width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(135deg, rgba(220, 252, 231, 0.95) 0%, rgba(254, 249, 195, 0.95) 100%); border: 1px solid rgba(22, 163, 74, 0.25); color: #15803d; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(22, 163, 74, 0.1); }
+    .badge-icon-theme { width: 34px; height: 34px; border-radius: 11px; background: linear-gradient(135deg, rgba(220, 252, 231, 0.95) 0%, rgba(254, 249, 195, 0.95) 100%); border: 1px solid rgba(22, 163, 74, 0.25); color: #15803d; display: inline-flex; align-items: center; justify-content: center; }
     .form-group { margin-bottom: 16px; }
     .form-label { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; color: var(--text-label); letter-spacing: 0.45px; margin-bottom: 7px; }
     .select-wrapper { position: relative; }
-
     .select-wrapper select {
-      width: 100%;
-      appearance: none;
-      -webkit-appearance: none;
-      padding: 13px 40px 13px 14px;
-      border-radius: 15px;
-      border: 1.5px solid var(--card-border-sub);
-      background: var(--input-bg);
-      color: var(--text-heading);
-      font-size: 13.5px;
-      font-weight: 700;
-      outline: none;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(20, 83, 45, 0.05);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      width: 100%; appearance: none; -webkit-appearance: none;
+      padding: 13px 40px 13px 14px; border-radius: 15px; border: 1.5px solid var(--card-border-sub);
+      background: var(--input-bg); color: var(--text-heading); font-size: 13.5px; font-weight: 700; outline: none; cursor: pointer;
     }
-
-    .select-wrapper select:focus { border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18); }
     .select-wrapper select:disabled { opacity: 0.6; cursor: not-allowed; }
     .select-chevron { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #22c55e; }
-
     .btn-primary {
-      width: 100%;
-      margin-top: 6px;
-      padding: 14px 16px;
-      border-radius: 16px;
+      width: 100%; margin-top: 6px; padding: 14px 16px; border-radius: 16px;
       border: 1.5px solid rgba(255, 255, 255, 0.65);
       background: linear-gradient(135deg, rgba(20, 83, 45, 0.95) 0%, rgba(21, 128, 61, 0.9) 55%, rgba(202, 138, 4, 0.92) 100%);
-      color: #ffffff;
-      font-size: 14.5px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      box-shadow: 0 10px 22px rgba(20, 83, 45, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.55);
-      transition: transform 0.15s ease, opacity 0.2s ease;
+      color: #ffffff; font-size: 14.5px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;
     }
+    .btn-primary:disabled { background: linear-gradient(135deg, rgba(22, 101, 52, 0.45) 0%, rgba(202, 138, 4, 0.45) 100%); color: #65a30d; opacity: 0.75; cursor: not-allowed; }
 
-    .btn-primary:active:not(:disabled) { transform: scale(0.985); }
-    .btn-primary:disabled { background: linear-gradient(135deg, rgba(22, 101, 52, 0.45) 0%, rgba(202, 138, 4, 0.45) 100%); border-color: var(--card-border-sub); color: #65a30d; box-shadow: none; opacity: 0.75; cursor: not-allowed; }
-
-    /* TAMPILAN 2: KARTU HASIL PESERTA */
     #resultSection { position: relative; z-index: 1; display: none; width: 100%; max-width: 460px; padding: 14px 16px 0 16px; }
-    .result-card { background: var(--card-glass); backdrop-filter: blur(24px) saturate(190%); -webkit-backdrop-filter: blur(24px) saturate(190%); border: 1.5px solid var(--card-border); border-bottom-color: var(--card-border-sub); border-right-color: var(--card-border-sub); border-radius: 26px; overflow: hidden; box-shadow: var(--card-shadow); }
-    .result-banner { position: relative; background: linear-gradient(135deg, rgba(20, 83, 45, 0.94) 0%, rgba(21, 128, 61, 0.88) 55%, rgba(202, 138, 4, 0.9) 100%); border-bottom: 1px solid rgba(255, 255, 255, 0.35); padding: 20px; color: #ffffff; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; overflow: hidden; }
-    .verified-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(254, 240, 138, 0.94); border: 1px solid rgba(255, 255, 255, 0.75); color: #14532d; font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 999px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+    .result-card { background: var(--card-glass); backdrop-filter: blur(24px) saturate(190%); -webkit-backdrop-filter: blur(24px) saturate(190%); border: 1.5px solid var(--card-border); border-radius: 26px; overflow: hidden; box-shadow: var(--card-shadow); }
+    .result-banner { background: linear-gradient(135deg, rgba(20, 83, 45, 0.94) 0%, rgba(21, 128, 61, 0.88) 55%, rgba(202, 138, 4, 0.9) 100%); padding: 20px; color: #ffffff; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .verified-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(254, 240, 138, 0.94); color: #14532d; font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 999px; margin-bottom: 10px; }
     .student-name { font-size: 18px; font-weight: 700; line-height: 1.25; text-transform: uppercase; margin-bottom: 5px; }
     .school-name { font-size: 13px; color: #fef9c3; text-transform: uppercase; }
     .no-peserta-box { background: rgba(20, 83, 45, 0.42); border: 1px solid rgba(255, 255, 255, 0.42); border-radius: 16px; padding: 9px 11px; text-align: right; flex-shrink: 0; max-width: 126px; }
-    .no-peserta-label { font-size: 9px; color: #fef08a; letter-spacing: 0.5px; margin-bottom: 3px; }
-    .no-peserta-value { font-size: 13px; font-weight: 700; color: #ffffff; line-height: 1.3; word-break: break-word; }
+    .no-peserta-label { font-size: 9px; color: #fef08a; margin-bottom: 3px; }
+    .no-peserta-value { font-size: 13px; font-weight: 700; color: #ffffff; word-break: break-word; }
     .result-body { padding: 18px 20px 20px 20px; }
-    .info-box-session { background: var(--box-session-bg); border: 1.5px solid var(--card-border); border-radius: 18px; padding: 13px 15px; display: flex; align-items: center; gap: 13px; box-shadow: 0 6px 16px rgba(20, 83, 45, 0.05); }
-    .clock-icon-box { width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, rgba(220, 252, 231, 0.9) 0%, rgba(254, 249, 195, 0.9) 100%); border: 1px solid rgba(255, 255, 255, 0.8); color: #15803d; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .session-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.5px; margin-bottom: 3px; }
+    .info-box-session { background: var(--box-session-bg); border: 1.5px solid var(--card-border); border-radius: 18px; padding: 13px 15px; display: flex; align-items: center; gap: 13px; }
+    .clock-icon-box { width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, rgba(220, 252, 231, 0.9) 0%, rgba(254, 249, 195, 0.9) 100%); color: #15803d; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .session-label { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
     .session-value { font-size: 14.5px; font-weight: 700; color: var(--text-heading); }
     .session-value .dot { color: #eab308; margin: 0 5px; }
     .session-value .time-text { color: #22c55e; }
-    .info-box-room { margin-top: 12px; background: var(--box-room-bg); border: 1.5px solid rgba(234, 179, 8, 0.55); border-radius: 18px; padding: 15px; text-align: center; box-shadow: 0 8px 18px rgba(202, 138, 4, 0.08); }
-    .room-label { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 10.5px; color: #eab308; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .info-box-room { margin-top: 12px; background: var(--box-room-bg); border: 1.5px solid rgba(234, 179, 8, 0.55); border-radius: 18px; padding: 15px; text-align: center; }
+    .room-label { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 10.5px; color: #eab308; margin-bottom: 6px; }
     .room-value { font-size: 22px; font-weight: 700; color: var(--text-heading); margin-bottom: 4px; }
     .room-note { font-size: 11.5px; color: var(--room-note-color); }
     .room-photo-frame { position: relative; margin-top: 13px; width: 100%; aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; background: rgba(255, 255, 255, 0.35); border: 1.5px solid var(--card-border); display: flex; align-items: center; justify-content: center; }
     .room-photo-frame.has-photo { cursor: pointer; }
     .room-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .room-photo-badge { position: absolute; top: 9px; left: 9px; background: rgba(20, 83, 45, 0.85); border: 1px solid rgba(254, 240, 138, 0.65); color: #fef08a; font-size: 9.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 5px; z-index: 2; }
-    .room-photo-zoom-hint { position: absolute; bottom: 9px; right: 9px; background: rgba(15, 23, 42, 0.72); border: 1px solid rgba(255, 255, 255, 0.4); color: #ffffff; font-size: 10px; padding: 4px 9px; border-radius: 999px; display: inline-flex; align-items: center; gap: 4px; z-index: 2; }
+    .room-photo-badge { position: absolute; top: 9px; left: 9px; background: rgba(20, 83, 45, 0.85); color: #fef08a; font-size: 9.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 5px; z-index: 2; }
+    .room-photo-zoom-hint { position: absolute; bottom: 9px; right: 9px; background: rgba(15, 23, 42, 0.72); color: #ffffff; font-size: 10px; padding: 4px 9px; border-radius: 999px; display: inline-flex; align-items: center; gap: 4px; z-index: 2; }
     .room-photo-placeholder { padding: 18px; text-align: center; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
-    .room-photo-placeholder-icon { width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, rgba(220, 252, 231, 0.9) 0%, rgba(254, 249, 195, 0.9) 100%); border: 1px solid rgba(22, 163, 74, 0.25); color: #15803d; display: flex; align-items: center; justify-content: center; }
+    .room-photo-placeholder-icon { width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, rgba(220, 252, 231, 0.9) 0%, rgba(254, 249, 195, 0.9) 100%); color: #15803d; display: flex; align-items: center; justify-content: center; }
     .room-photo-placeholder-title { font-size: 12px; font-weight: 700; color: var(--text-label); }
     .room-photo-placeholder-sub { font-size: 10.5px; color: var(--text-muted); }
 
-    /* KODE QR PRESENSI */
-    .qr-section {
-      margin-top: 14px;
-      background: var(--qr-bg);
-      border: 1.5px dashed rgba(34, 197, 94, 0.55);
-      border-radius: 18px;
-      padding: 16px 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .qr-title {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-label);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .qr-white-frame {
-      width: 180px;
-      height: 180px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-      padding: 12px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(20, 83, 45, 0.14);
-      overflow: hidden;
-    }
-
-    #qrcode {
-      width: 156px;
-      height: 156px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #qrcode svg {
-      display: block;
-      width: 100% !important;
-      height: 100% !important;
-      max-width: 156px;
-      max-height: 156px;
-    }
-
+    .qr-section { margin-top: 14px; background: var(--qr-bg); border: 1.5px dashed rgba(34, 197, 94, 0.55); border-radius: 18px; padding: 16px 15px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .qr-title { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; font-weight: 700; color: var(--text-label); text-transform: uppercase; margin-bottom: 12px; }
+    .qr-white-frame { width: 180px; height: 180px; margin: 0 auto; display: flex; align-items: center; justify-content: center; background: #ffffff; padding: 12px; border-radius: 16px; box-shadow: 0 8px 20px rgba(20, 83, 45, 0.14); }
+    #qrcode { width: 156px; height: 156px; display: flex; align-items: center; justify-content: center; }
+    #qrcode svg { display: block; width: 100% !important; height: 100% !important; }
     .qr-code-text { margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--text-heading); letter-spacing: 0.8px; }
     .qr-hint { margin-top: 3px; font-size: 11px; color: var(--text-label); }
 
-    .btn-download-glass { width: 100%; margin-top: 12px; padding: 10.5px 14px; background: linear-gradient(135deg, rgba(22, 101, 52, 0.92) 0%, rgba(21, 128, 61, 0.88) 55%, rgba(202, 138, 4, 0.9) 100%); border: 1.5px solid rgba(255, 255, 255, 0.65); border-radius: 13px; color: #ffffff; font-size: 12.5px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer; box-shadow: 0 6px 14px rgba(20, 83, 45, 0.18); }
-    .mid-ticker-bar { margin-top: 14px; width: 100%; background: linear-gradient(135deg, rgba(20, 83, 45, 0.92) 0%, rgba(21, 128, 61, 0.88) 55%, rgba(202, 138, 4, 0.9) 100%); border: 1.5px solid rgba(254, 240, 138, 0.6); border-radius: 14px; padding: 8px 0; display: flex; align-items: center; overflow: hidden; }
-    .mid-ticker-badge { flex-shrink: 0; margin: 0 8px 0 9px; padding: 3px 9px; border-radius: 999px; background: #fef08a; color: #14532d; font-size: 9.5px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+    .btn-download-glass { width: 100%; margin-top: 12px; padding: 10.5px 14px; background: linear-gradient(135deg, rgba(22, 101, 52, 0.92) 0%, rgba(21, 128, 61, 0.88) 55%, rgba(202, 138, 4, 0.9) 100%); border: 1.5px solid rgba(255, 255, 255, 0.65); border-radius: 13px; color: #ffffff; font-size: 12.5px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer; }
     .participant-card-box { margin-top: 14px; background: var(--pcard-bg); border: 1.5px solid rgba(34, 197, 94, 0.35); border-radius: 18px; overflow: hidden; }
-    .participant-card-header { background: linear-gradient(135deg, rgba(20, 83, 45, 0.94) 0%, rgba(22, 101, 52, 0.9) 65%, rgba(202, 138, 4, 0.92) 100%); padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; color: #ffffff; border-bottom: 1px solid rgba(255, 255, 255, 0.35); }
+    .participant-card-header { background: linear-gradient(135deg, rgba(20, 83, 45, 0.94) 0%, rgba(22, 101, 52, 0.9) 65%, rgba(202, 138, 4, 0.92) 100%); padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; color: #ffffff; }
     .participant-card-title { display: inline-flex; align-items: center; gap: 7px; font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: #fef08a; }
     .participant-card-tag { font-size: 9.5px; font-weight: 700; padding: 2.5px 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.18); color: #ffffff; }
     .participant-card-body { padding: 12px 14px 14px 14px; display: flex; flex-direction: column; gap: 9px; }
@@ -571,7 +363,7 @@
 
     @media print {
       body { background: #ffffff !important; color: #14281d !important; padding: 0 !important; }
-      .sticky-topbar, .wa-floating-btn, .inapp-browser-bar, .ambient-bg, #promoModal, #roomPhotoModal, #searchSection, .no-print, .footer, .promo-ticker-bar, .inline-promo-section, .mid-ticker-bar { display: none !important; }
+      .sticky-topbar, .wa-floating-btn, .ambient-bg, #promoModal, #roomPhotoModal, #searchSection, .no-print, .footer, .promo-ticker-bar, .inline-promo-section { display: none !important; }
       #resultSection { display: block !important; padding: 0; max-width: 100%; }
       .result-card, .participant-card-box { background: #ffffff !important; box-shadow: none; border: 2px solid #16a34a; }
     }
@@ -579,7 +371,6 @@
 </head>
 <body>
 
-  <!-- STICKY TOP BAR -->
   <div class="sticky-topbar no-print">
     <div class="sticky-topbar-inner">
       <img id="stickyLogoImg" src="" alt="Logo" class="sticky-logo-img" onerror="this.style.display='none';">
@@ -605,7 +396,6 @@
     </div>
   </div>
 
-  <!-- TOMBOL MENGAMBANG WHATSAPP (BISA DIGESER) -->
   <div id="waFloatingBtn" class="wa-floating-btn no-print" role="button" tabindex="0" aria-label="Hubungi Admin via WhatsApp" title="Geser atau klik untuk chat WhatsApp">
     <span class="wa-floating-badge"></span>
     <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
@@ -614,33 +404,21 @@
     </svg>
   </div>
 
-  <!-- BANNER OTOMATIS JIKA DIBUKA DARI BROWSER INSTAGRAM / TIKTOK -->
-  <div id="inAppBrowserBar" class="inapp-browser-bar no-print">
-    <div class="inapp-browser-box">
-      <div class="inapp-browser-text">
-        <strong>Membuka dari Instagram / Sosmed?</strong>
-        <span id="inAppHintText">Buka di Chrome / Safari agar unduh kartu &amp; QR lebih lancar.</span>
-      </div>
-      <button type="button" class="inapp-open-btn" onclick="bukaDiBrowserEksternal(this)">Buka Browser</button>
-    </div>
-  </div>
-
   <div class="ambient-bg" aria-hidden="true">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- POP-UP IKLAN SLIDER AWAL -->
   <div id="promoModal" class="promo-overlay" onclick="if(event.target === this) tutupIklan()">
     <div class="promo-wrapper">
       <button type="button" class="promo-close-btn" onclick="tutupIklan()" aria-label="Tutup Iklan">&times;</button>
       <div class="promo-card">
         <div id="promoTrack" class="promo-track"></div>
-        <button type="button" id="btnPrevSlide" class="promo-nav prev" onclick="geserSlide(-1)" aria-label="Slide Sebelumnya">
+        <button type="button" id="btnPrevSlide" class="promo-nav prev" onclick="geserSlide(-1)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
-        <button type="button" id="btnNextSlide" class="promo-nav next" onclick="geserSlide(1)" aria-label="Slide Berikutnya">
+        <button type="button" id="btnNextSlide" class="promo-nav next" onclick="geserSlide(1)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
         <div class="promo-footer-bar">
@@ -651,7 +429,6 @@
     </div>
   </div>
 
-  <!-- LIGHTBOX PREVIEW FOTO RUANGAN -->
   <div id="roomPhotoModal" class="photo-lightbox" onclick="if(event.target === this) tutupFotoRuangan()">
     <div class="promo-wrapper">
       <button type="button" class="promo-close-btn" onclick="tutupFotoRuangan()">&times;</button>
@@ -662,7 +439,6 @@
     </div>
   </div>
 
-  <!-- TAMPILAN 1: FORM PENCARIAN -->
   <div id="searchSection">
     <div class="search-card">
       <header class="hero-header">
@@ -679,13 +455,13 @@
               <path d="m9 14 2 2 4-4"/>
             </svg>
           </span>
-          <span>Cari Data Peserta Ujian</span>
+          <span>CARI DATA PESERTA UJIAN</span>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="selectSekolah">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22v-4a2 2 0 1 0-4 0v4"/><path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/><path d="M18 5v17"/><path d="m4 6 8-4 8 4"/><path d="M6 5v17"/><circle cx="12" cy="9" r="2"/></svg>
-            <span>1. PILIH ASAL SEKOLAH</span>
+            <span>PILIH ASAL SEKOLAH</span>
           </label>
           <div class="select-wrapper">
             <select id="selectSekolah" disabled><option value="">Memuat data sekolah...</option></select>
@@ -696,10 +472,10 @@
         <div class="form-group">
           <label class="form-label" for="selectSiswa">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
-            <span>2. PILIH NAMA SISWA</span>
+            <span>PILIH NAMA SISWA</span>
           </label>
           <div class="select-wrapper">
-            <select id="selectSiswa" disabled><option value="">-- Pilih Nama Siswa --</option></select>
+            <select id="selectSiswa" disabled><option value="">Pilih Nama Siswa</option></select>
             <svg class="select-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </div>
         </div>
@@ -711,11 +487,10 @@
       </div>
     </div>
 
-    <!-- SLIDER POSTER DI HALAMAN DEPAN -->
     <div id="searchInlinePromoSection" class="inline-promo-section no-print" style="display:none;">
       <div class="inline-promo-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-        <span>POSTER INFORMASI &amp; PROMO</span>
+        <span>INFORMASI &amp; PROMO</span>
       </div>
       <div class="inline-promo-card">
         <div id="searchInlinePromoTrack" class="promo-track"></div>
@@ -733,7 +508,6 @@
     </div>
   </div>
 
-  <!-- TAMPILAN 2: HASIL PESERTA -->
   <div id="resultSection">
     <div class="result-card">
       <div class="result-banner">
@@ -772,7 +546,7 @@
             <span>LOKASI LANTAI &amp; RUANGAN UJIAN</span>
           </div>
           <div id="resRuangan" class="room-value">-</div>
-          <div class="room-note">Harap hadir 15 menit sebelum ujian dimulai.</div>
+          <div class="room-note">Harap hadir 30 menit sebelum ujian dimulai.</div>
 
           <div id="roomPhotoFrame" class="room-photo-frame" onclick="bukaFotoRuangan()">
             <span class="room-photo-badge">
@@ -801,19 +575,7 @@
           </div>
           <div class="qr-white-frame"><div id="qrcode"></div></div>
           <div id="qrTextLabel" class="qr-code-text">-</div>
-          <div class="qr-hint">Tunjukkan QR ini kepada panitia saat masuk ruangan</div>
-          <button type="button" class="btn-download-glass no-print" onclick="unduhKodeQR()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-            <span>Unduh Kode QR (PNG)</span>
-          </button>
-        </div>
-
-        <div class="mid-ticker-bar no-print">
-          <span class="mid-ticker-badge">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-            <span>PROMO</span>
-          </span>
-          <div class="ticker-viewport"><div id="midTickerTrack" class="ticker-track"></div></div>
+          <div class="qr-hint">Tunjukkan QR ini kepada panitia saat registrasi</div>
         </div>
 
         <div class="participant-card-box">
@@ -844,7 +606,7 @@
                   <div class="p-card-label">USERNAME</div>
                   <div id="cardUsername" class="p-card-cred-val">-</div>
                 </div>
-                <button type="button" class="btn-copy-mini no-print" onclick="salinTeks('cardUsername', this)" aria-label="Salin Username">
+                <button type="button" class="btn-copy-mini no-print" onclick="salinTeks('cardUsername', this)">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                 </button>
               </div>
@@ -853,14 +615,14 @@
                   <div class="p-card-label">PASSWORD</div>
                   <div id="cardPassword" class="p-card-cred-val">-</div>
                 </div>
-                <button type="button" class="btn-copy-mini no-print" onclick="salinTeks('cardPassword', this)" aria-label="Salin Password">
+                <button type="button" class="btn-copy-mini no-print" onclick="salinTeks('cardPassword', this)">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
                 </button>
               </div>
             </div>
             <button type="button" class="btn-download-glass no-print" onclick="unduhKartuPeserta()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-              <span>Unduh Kartu Peserta (PNG)</span>
+              <span>Unduh Kartu Peserta</span>
             </button>
           </div>
         </div>
@@ -893,7 +655,7 @@
         </button>
         <button type="button" id="btnPrint" class="btn-dark no-print">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
-          <span>Cetak / Simpan PDF</span>
+          <span>Print / Simpan PDF</span>
         </button>
       </div>
     </div>
@@ -911,9 +673,12 @@
 
   <script>
     // =========================================================================
-    // TEMPELKAN URL WEB APP GOOGLE APPS SCRIPT (/exec) DI BAWAH INI:
+    // TEMPELKAN URL WEB APP APPS SCRIPT (/exec) GAMA'88 X FUNTASTICJS DI SINI:
     // =========================================================================
     const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyKGHhggeehg1EWJc3nsd9HkKgq_zEXN-t9dvtAikPKBsquR1rT6IZKo3_Ph05cgo3-zQ/exec';
+    const CACHE_STORAGE_KEY = 'gama88_funtasticjs_cache_v1';
+    const CACHE_FRESH_MS = 10 * 60 * 1000;
+    const CACHE_MAX_AGE_MS = 12 * 60 * 60 * 1000;
 
     let SERVER_INIT_DATA = {
       peserta: [],
@@ -927,29 +692,6 @@
       webAppUrl: window.location.href
     };
 
-    // Deteksi browser bawaan Instagram / TikTok / Facebook
-    (function checkInAppBrowser() {
-      const ua = navigator.userAgent || '';
-      if (/Instagram|FBAN|FBAV|FB_IAB|TikTok|BytedanceWebview|Line/i.test(ua)) {
-        const bar = document.getElementById('inAppBrowserBar');
-        if (bar) bar.style.display = 'block';
-      }
-    })();
-
-    function bukaDiBrowserEksternal(btnEl) {
-      const targetUrl = window.location.href;
-      fallbackSalin(targetUrl);
-      const isAndroid = /Android/i.test(navigator.userAgent || '');
-      if (isAndroid && targetUrl.indexOf('https://') === 0) {
-        const cleanUrl = targetUrl.replace(/^https?:\/\//, '');
-        window.location.href = 'intent://' + cleanUrl + '#Intent;scheme=https;package=com.android.chrome;end';
-      }
-      const hint = document.getElementById('inAppHintText');
-      if (hint) hint.textContent = 'Link tersalin! Ketuk titik tiga (•••) di pojok atas lalu pilih "Buka di Browser / Safari".';
-      if (btnEl) btnEl.textContent = 'Link Tersalin!';
-    }
-
-    // LOGIKA TOMBOL MENGAMBANG WHATSAPP (GESER & KLIK)
     let currentPeserta = null;
 
     function bukaWhatsAppAdmin() {
@@ -969,120 +711,58 @@
         ? ('https://wa.me/' + waNum + '?text=' + encodeURIComponent(pesan))
         : ('https://api.whatsapp.com/send?text=' + encodeURIComponent(pesan));
 
-      const win = window.open(waUrl, '_blank', 'noopener,noreferrer');
-      if (!win) {
-        try { window.top.location.href = waUrl; } catch (e) { window.location.href = waUrl; }
-      }
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
     }
 
     (function initDraggableWhatsApp() {
       const btn = document.getElementById('waFloatingBtn');
       if (!btn) return;
-
-      let isPointerDown = false;
-      let hasMoved = false;
-      let startX = 0, startY = 0;
-      let offsetX = 0, offsetY = 0;
+      let isPointerDown = false, hasMoved = false, startX = 0, startY = 0, offsetX = 0, offsetY = 0;
 
       function clampPosition(left, top) {
-        const w = btn.offsetWidth || 56;
-        const h = btn.offsetHeight || 56;
-        const minX = 10;
-        const maxX = Math.max(minX, window.innerWidth - w - 10);
-        const minY = 58;
-        const maxY = Math.max(minY, window.innerHeight - h - 48);
+        const w = btn.offsetWidth || 56, h = btn.offsetHeight || 56;
         return {
-          x: Math.min(Math.max(left, minX), maxX),
-          y: Math.min(Math.max(top, minY), maxY)
+          x: Math.min(Math.max(left, 10), Math.max(10, window.innerWidth - w - 10)),
+          y: Math.min(Math.max(top, 58), Math.max(58, window.innerHeight - h - 48))
         };
       }
 
       function onStart(clientX, clientY) {
-        isPointerDown = true;
-        hasMoved = false;
+        isPointerDown = true; hasMoved = false;
         const rect = btn.getBoundingClientRect();
-        btn.style.left = rect.left + 'px';
-        btn.style.top = rect.top + 'px';
-        btn.style.right = 'auto';
-        btn.style.bottom = 'auto';
-        startX = clientX;
-        startY = clientY;
-        offsetX = clientX - rect.left;
-        offsetY = clientY - rect.top;
+        btn.style.left = rect.left + 'px'; btn.style.top = rect.top + 'px';
+        btn.style.right = 'auto'; btn.style.bottom = 'auto';
+        startX = clientX; startY = clientY;
+        offsetX = clientX - rect.left; offsetY = clientY - rect.top;
       }
 
       function onMove(clientX, clientY, e) {
         if (!isPointerDown) return;
-        const dx = clientX - startX;
-        const dy = clientY - startY;
-        if (!hasMoved && Math.hypot(dx, dy) > 6) {
-          hasMoved = true;
-          btn.classList.add('is-dragging');
+        if (!hasMoved && Math.hypot(clientX - startX, clientY - startY) > 6) {
+          hasMoved = true; btn.classList.add('is-dragging');
         }
         if (hasMoved) {
           if (e && e.cancelable) e.preventDefault();
           const pos = clampPosition(clientX - offsetX, clientY - offsetY);
-          btn.style.left = pos.x + 'px';
-          btn.style.top = pos.y + 'px';
+          btn.style.left = pos.x + 'px'; btn.style.top = pos.y + 'px';
         }
       }
 
       function onEnd() {
         if (!isPointerDown) return;
-        isPointerDown = false;
-        btn.classList.remove('is-dragging');
-        if (!hasMoved) {
-          bukaWhatsAppAdmin();
-        }
+        isPointerDown = false; btn.classList.remove('is-dragging');
+        if (!hasMoved) bukaWhatsAppAdmin();
       }
 
-      btn.addEventListener('touchstart', function(e) {
-        if (e.touches && e.touches.length === 1) {
-          onStart(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      }, { passive: true });
-
-      window.addEventListener('touchmove', function(e) {
-        if (isPointerDown && e.touches && e.touches.length === 1) {
-          onMove(e.touches[0].clientX, e.touches[0].clientY, e);
-        }
-      }, { passive: false });
-
+      btn.addEventListener('touchstart', e => { if (e.touches && e.touches.length === 1) onStart(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+      window.addEventListener('touchmove', e => { if (isPointerDown && e.touches && e.touches.length === 1) onMove(e.touches[0].clientX, e.touches[0].clientY, e); }, { passive: false });
       window.addEventListener('touchend', onEnd);
-
-      btn.addEventListener('mousedown', function(e) {
-        if (e.button !== 0) return;
-        onStart(e.clientX, e.clientY);
-      });
-
-      window.addEventListener('mousemove', function(e) {
-        if (isPointerDown) {
-          onMove(e.clientX, e.clientY, e);
-        }
-      });
-
+      btn.addEventListener('mousedown', e => { if (e.button === 0) onStart(e.clientX, e.clientY); });
+      window.addEventListener('mousemove', e => { if (isPointerDown) onMove(e.clientX, e.clientY, e); });
       window.addEventListener('mouseup', onEnd);
-
-      btn.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          bukaWhatsAppAdmin();
-        }
-      });
-
-      window.addEventListener('resize', function() {
-        if (btn.style.left && btn.style.left !== 'auto') {
-          const rect = btn.getBoundingClientRect();
-          const pos = clampPosition(rect.left, rect.top);
-          btn.style.left = pos.x + 'px';
-          btn.style.top = pos.y + 'px';
-        }
-      });
     })();
 
-    let loadedLogoImage = null;
-    let logoDarkSrc = '';
-    let logoLightSrc = '';
+    let loadedLogoImage = null, logoDarkSrc = '', logoLightSrc = '';
 
     function rgbToHsl(r, g, b) {
       r /= 255; g /= 255; b /= 255;
@@ -1103,78 +783,42 @@
 
     function hslToRgb(h, s, l) {
       let r, g, b;
-      if (s === 0) {
-        r = g = b = l;
-      } else {
-        const hue2rgb = function(p, q, t) {
-          if (t < 0) t += 1;
-          if (t > 1) t -= 1;
-          if (t < 1 / 6) return p + (q - p) * 6 * t;
-          if (t < 1 / 2) return q;
-          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-          return p;
-        };
-        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-        const p = 2 * l - q;
-        r = hue2rgb(p, q, h + 1 / 3);
-        g = hue2rgb(p, q, h);
-        b = hue2rgb(p, q, h - 1 / 3);
+      if (s === 0) { r = g = b = l; }
+      else {
+        const hue2rgb = (p, q, t) => { if (t < 0) t += 1; if (t > 1) t -= 1; if (t < 1/6) return p + (q - p) * 6 * t; if (t < 1/2) return q; if (t < 2/3) return p + (q - p) * (2/3 - t) * 6; return p; };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s, p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3); g = hue2rgb(p, q, h); b = hue2rgb(p, q, h - 1/3);
       }
       return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
     }
 
     function buatVersiLogoModeTerang(srcUrl) {
-      return new Promise(function(resolve) {
+      return new Promise(resolve => {
         if (!srcUrl) { resolve(''); return; }
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
+        const img = new Image(); img.crossOrigin = 'anonymous';
         img.onload = function() {
           try {
-            const w = img.naturalWidth;
-            const h = img.naturalHeight;
+            const w = img.naturalWidth, h = img.naturalHeight;
             if (!w || !h) { resolve(srcUrl); return; }
-
-            const canvas = document.createElement('canvas');
-            canvas.width = w;
-            canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-
-            const imageData = ctx.getImageData(0, 0, w, h);
-            const data = imageData.data;
-
+            const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0);
+            const imageData = ctx.getImageData(0, 0, w, h), data = imageData.data;
             for (let i = 0; i < data.length; i += 4) {
               if (data[i + 3] < 10) continue;
-              const r = data[i], g = data[i + 1], b = data[i + 2];
-              const hsl = rgbToHsl(r, g, b);
-              const hue = hsl[0], sat = hsl[1], light = hsl[2];
-
-              if (sat < 0.25) {
-                if (light >= 0.35) {
-                  const newLight = 0.15 + (1 - light) * 0.42;
-                  const rgb = hslToRgb(144 / 360, 0.62, newLight);
-                  data[i] = rgb[0];
-                  data[i + 1] = rgb[1];
-                  data[i + 2] = rgb[2];
-                }
-              } else {
-                if (light > 0.38) {
-                  const newLight = 0.24 + (light - 0.38) * 0.25;
-                  const rgb = hslToRgb(hue, Math.min(1, sat * 1.08), newLight);
-                  data[i] = rgb[0];
-                  data[i + 1] = rgb[1];
-                  data[i + 2] = rgb[2];
-                }
+              const hsl = rgbToHsl(data[i], data[i + 1], data[i + 2]);
+              if (hsl[1] < 0.25 && hsl[2] >= 0.35) {
+                const rgb = hslToRgb(144 / 360, 0.62, 0.15 + (1 - hsl[2]) * 0.42);
+                data[i] = rgb[0]; data[i + 1] = rgb[1]; data[i + 2] = rgb[2];
+              } else if (hsl[2] > 0.38) {
+                const rgb = hslToRgb(hsl[0], Math.min(1, hsl[1] * 1.08), 0.24 + (hsl[2] - 0.38) * 0.25);
+                data[i] = rgb[0]; data[i + 1] = rgb[1]; data[i + 2] = rgb[2];
               }
             }
-
             ctx.putImageData(imageData, 0, 0);
             resolve(canvas.toDataURL('image/png'));
-          } catch (e) {
-            resolve(srcUrl);
-          }
+          } catch (e) { resolve(srcUrl); }
         };
-        img.onerror = function() { resolve(srcUrl); };
+        img.onerror = () => resolve(srcUrl);
         img.src = srcUrl;
       });
     }
@@ -1184,81 +828,65 @@
       if (!stickyLogo) return;
       const isDark = document.body.classList.contains('dark-mode');
       const targetSrc = isDark ? logoDarkSrc : (logoLightSrc || logoDarkSrc);
-      if (targetSrc) {
-        stickyLogo.src = targetSrc;
-        stickyLogo.style.display = 'block';
-      }
+      if (targetSrc) { stickyLogo.src = targetSrc; stickyLogo.style.display = 'block'; }
     }
 
     function applyTheme(isDark) {
       document.body.classList.toggle('dark-mode', isDark);
-      const thumbSun = document.getElementById('thumbSun');
-      const thumbMoon = document.getElementById('thumbMoon');
-      if (thumbSun) thumbSun.style.display = isDark ? 'none' : 'block';
-      if (thumbMoon) thumbMoon.style.display = isDark ? 'block' : 'none';
+      document.getElementById('thumbSun').style.display = isDark ? 'none' : 'block';
+      document.getElementById('thumbMoon').style.display = isDark ? 'block' : 'none';
       updateStickyLogoByTheme();
     }
 
     function toggleTema() {
       const nextDark = !document.body.classList.contains('dark-mode');
       applyTheme(nextDark);
-      try { localStorage.setItem('tka_theme_mode', nextDark ? 'dark' : 'light'); } catch (e) {}
+      try { localStorage.setItem('gama88_theme_mode', nextDark ? 'dark' : 'light'); } catch (e) {}
     }
 
     (function initSavedTheme() {
-      try { if (localStorage.getItem('tka_theme_mode') === 'dark') applyTheme(true); } catch (e) {}
+      try { if (localStorage.getItem('gama88_theme_mode') === 'dark') applyTheme(true); } catch (e) {}
     })();
 
+    function ensureLogoLoaded() {
+      if (loadedLogoImage && loadedLogoImage.complete && loadedLogoImage.naturalWidth > 0) return;
+      const dataUri = logoDarkSrc || SERVER_INIT_DATA.logoDataUri || SERVER_INIT_DATA.logoUrl;
+      if (!dataUri) return;
+      const imgObj = new Image();
+      imgObj.crossOrigin = 'anonymous';
+      imgObj.onload = () => { loadedLogoImage = imgObj; };
+      imgObj.onerror = () => { loadedLogoImage = null; };
+      imgObj.src = dataUri;
+    }
+
+    function getReadyLogoImage() {
+      return (loadedLogoImage && loadedLogoImage.complete && loadedLogoImage.naturalWidth > 0)
+        ? loadedLogoImage
+        : null;
+    }
+
     function initLogoFromServer() {
-      const rawDarkSrc = (SERVER_INIT_DATA && (SERVER_INIT_DATA.logoDataUri || SERVER_INIT_DATA.logoUrl)) || '';
-      const manualLightSrc = (SERVER_INIT_DATA && SERVER_INIT_DATA.logoLightDataUri) || '';
+      const rawDarkSrc = SERVER_INIT_DATA.logoDataUri || SERVER_INIT_DATA.logoUrl || '';
+      const manualLightSrc = SERVER_INIT_DATA.logoLightDataUri || '';
       if (!rawDarkSrc && !manualLightSrc) return;
-
       logoDarkSrc = rawDarkSrc || manualLightSrc;
-
-      if (manualLightSrc) {
-        logoLightSrc = manualLightSrc;
-        updateStickyLogoByTheme();
-      } else {
-        buatVersiLogoModeTerang(logoDarkSrc).then(function(generatedLight) {
-          logoLightSrc = generatedLight || logoDarkSrc;
-          updateStickyLogoByTheme();
-        });
-      }
-
+      if (manualLightSrc) { logoLightSrc = manualLightSrc; updateStickyLogoByTheme(); }
+      else { buatVersiLogoModeTerang(logoDarkSrc).then(gen => { logoLightSrc = gen || logoDarkSrc; updateStickyLogoByTheme(); }); }
       ensureLogoLoaded();
     }
 
-    function ensureLogoLoaded() {
-      return new Promise(function(resolve) {
-        if (loadedLogoImage && loadedLogoImage.complete && loadedLogoImage.naturalWidth > 0) {
-          resolve(loadedLogoImage);
-          return;
-        }
-        const dataUri = logoDarkSrc || (SERVER_INIT_DATA && (SERVER_INIT_DATA.logoDataUri || SERVER_INIT_DATA.logoUrl));
-        if (!dataUri) { resolve(null); return; }
-        const imgObj = new Image();
-        imgObj.crossOrigin = 'anonymous';
-        imgObj.onload = function() { loadedLogoImage = imgObj; resolve(imgObj); };
-        imgObj.onerror = function() { resolve(null); };
-        imgObj.src = dataUri;
-      });
-    }
-
-    const BASE_RUNNING_TEXT = [
+    const baseRunningText = [
       "Selamat datang peserta <strong>GAMA'88 X FUNTASTICJS</strong>! Silakan cek jadwal sesi, lokasi ruangan, dan akun ujian Anda di halaman ini.",
       "Ajak teman &amp; kerabatmu bergabung bersama <strong>GAMA'88 X FUNTASTICJS</strong>! Konsultasi gratis dan info pendaftaran silakan hubungi <strong>Panitia di Meja Informasi</strong>.",
-      "Klik tombol <strong>Unduh Kode QR</strong> &amp; <strong>Unduh Kartu Peserta</strong> agar tersimpan otomatis di galeri HP kamu."
+      "Klik tombol <strong>Unduh Kartu Peserta</strong> agar kartu ujian &amp; kode QR tersimpan otomatis di galeri HP kamu."
     ];
 
     function initRunningText() {
-      const list = BASE_RUNNING_TEXT.slice();
-      if (SERVER_INIT_DATA && SERVER_INIT_DATA.promoTeks) {
-        list.unshift("<strong>" + SERVER_INIT_DATA.promoTeks + "</strong>");
-      }
+      const list = baseRunningText.slice();
+      if (SERVER_INIT_DATA && SERVER_INIT_DATA.promoTeks) list.unshift("<strong>" + SERVER_INIT_DATA.promoTeks + "</strong>");
       const itemsHtml = list.map(t => `<span class="ticker-item"><span>${t}</span><span class="ticker-sep">&#10022;</span></span>`).join('');
-      document.getElementById('tickerTrack').innerHTML = itemsHtml + itemsHtml;
-      document.getElementById('midTickerTrack').innerHTML = itemsHtml + itemsHtml;
+      const bottomTicker = document.getElementById('tickerTrack');
+      if (bottomTicker) bottomTicker.innerHTML = itemsHtml + itemsHtml;
     }
 
     function salinTeks(elementId, btnEl) {
@@ -1267,30 +895,14 @@
       const teks = el.textContent.trim();
       if (!teks || teks === '-') return;
       const originalHtml = btnEl.innerHTML;
-
-      function suksesSalin() {
-        btnEl.innerHTML = '&#10004;';
-        setTimeout(function() { btnEl.innerHTML = originalHtml; }, 1400);
-      }
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(teks).then(suksesSalin).catch(function() {
-          fallbackSalin(teks);
-          suksesSalin();
-        });
-      } else {
-        fallbackSalin(teks);
-        suksesSalin();
-      }
+      const done = () => { btnEl.innerHTML = '&#10004;'; setTimeout(() => { btnEl.innerHTML = originalHtml; }, 1400); };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(teks).then(done).catch(() => { fallbackSalin(teks); done(); }); }
+      else { fallbackSalin(teks); done(); }
     }
 
     function fallbackSalin(teks) {
-      const ta = document.createElement('textarea');
-      ta.value = teks;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
+      const ta = document.createElement('textarea'); ta.value = teks; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
       try { document.execCommand('copy'); } catch (e) {}
       document.body.removeChild(ta);
     }
@@ -1376,37 +988,23 @@
       function buildSVG(text) {
         const { size, grid } = getMatrix(text), q = 2, total = size + q * 2;
         let pathD = '';
-        for (let r = 0; r < size; r++) {
-          for (let c = 0; c < size; c++) {
-            if (grid[r][c]) pathD += `M${c + q} ${r + q}h1v1h-1z`;
-          }
-        }
+        for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (grid[r][c]) pathD += `M${c + q} ${r + q}h1v1h-1z`;
         return `<svg xmlns="http://www.w3.org/2000/svg" width="156" height="156" viewBox="0 0 ${total} ${total}" shape-rendering="crispEdges"><rect width="${total}" height="${total}" fill="#ffffff"/><path d="${pathD}" fill="#0f172a"/></svg>`;
       }
       return { buildSVG, getMatrix };
     })();
 
-    let daftarIklan = [];
-    let currentSlide = 0, slideTimer = null, touchStartX = 0, promoEventsBound = false;
+    let daftarIklan = [], currentSlide = 0, slideTimer = null, touchStartX = 0, promoEventsBound = false;
 
     function initPromoSlider() {
       if (!daftarIklan || daftarIklan.length === 0) return;
       currentSlide = 0;
-      const modal = document.getElementById('promoModal');
-      const track = document.getElementById('promoTrack');
-      const dots = document.getElementById('promoDots');
-
+      const modal = document.getElementById('promoModal'), track = document.getElementById('promoTrack'), dots = document.getElementById('promoDots');
       track.style.transform = 'translateX(0%)';
-      track.innerHTML = daftarIklan.map((item, idx) => `
-        <div class="promo-slide" style="${item.link ? 'cursor:pointer;' : ''}" onclick="klikSlide(${idx})">
-          <div class="promo-ig-frame"><img src="${item.gambar}" alt="Promo ${idx + 1}" decoding="async"></div>
-        </div>
-      `).join('');
-
+      track.innerHTML = daftarIklan.map((item, idx) => `<div class="promo-slide" style="${item.link ? 'cursor:pointer;' : ''}" onclick="klikSlide(${idx})"><div class="promo-ig-frame"><img src="${item.gambar}" alt="Promo ${idx + 1}" decoding="async"></div></div>`).join('');
       dots.innerHTML = daftarIklan.map((_, idx) => `<button type="button" class="promo-dot ${idx === 0 ? 'active' : ''}" onclick="keSlide(${idx})"></button>`).join('');
       document.getElementById('btnPrevSlide').style.display = daftarIklan.length <= 1 ? 'none' : 'flex';
       document.getElementById('btnNextSlide').style.display = daftarIklan.length <= 1 ? 'none' : 'flex';
-
       if (!promoEventsBound) {
         promoEventsBound = true;
         track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; if (slideTimer) clearInterval(slideTimer); }, { passive: true });
@@ -1417,8 +1015,7 @@
     }
 
     function keSlide(index) {
-      const total = daftarIklan.length;
-      currentSlide = (index + total) % total;
+      const total = daftarIklan.length; currentSlide = (index + total) % total;
       document.getElementById('promoTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
       document.querySelectorAll('#promoDots .promo-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
     }
@@ -1427,21 +1024,16 @@
     function mulaiAutoSlide() { if (daftarIklan.length <= 1) return; if (slideTimer) clearInterval(slideTimer); slideTimer = setInterval(() => geserSlide(1), 4500); }
     function tutupIklan() { if (slideTimer) clearInterval(slideTimer); document.getElementById('promoModal').style.display = 'none'; }
 
-    let currentInlineSlide = 0, inlineSlideTimer = null;
-    let currentSearchInlineSlide = 0, searchInlineSlideTimer = null;
+    let currentInlineSlide = 0, inlineSlideTimer = null, currentSearchInlineSlide = 0, searchInlineSlideTimer = null;
 
     function initInlinePromoSlider() {
       const hasIklan = daftarIklan && daftarIklan.length > 0;
-
       const section = document.getElementById('inlinePromoSection');
-      if (!hasIklan) {
-        if (section) section.style.display = 'none';
-      } else if (section) {
+      if (!hasIklan) { if (section) section.style.display = 'none'; }
+      else if (section) {
         section.style.display = 'block';
-        const track = document.getElementById('inlinePromoTrack');
-        const dots = document.getElementById('inlinePromoDots');
-        track.innerHTML = daftarIklan.map((item, idx) => `<div class="promo-slide" onclick="klikSlide(${idx})"><div class="promo-ig-frame"><img src="${item.gambar}" alt="Promo ${idx + 1}" loading="lazy"></div></div>`).join('');
-        dots.innerHTML = daftarIklan.map((_, idx) => `<button type="button" class="promo-dot ${idx === 0 ? 'active' : ''}" onclick="keInlineSlide(${idx})"></button>`).join('');
+        document.getElementById('inlinePromoTrack').innerHTML = daftarIklan.map((item, idx) => `<div class="promo-slide" onclick="klikSlide(${idx})"><div class="promo-ig-frame"><img src="${item.gambar}" alt="Promo ${idx + 1}" loading="lazy"></div></div>`).join('');
+        document.getElementById('inlinePromoDots').innerHTML = daftarIklan.map((_, idx) => `<button type="button" class="promo-dot ${idx === 0 ? 'active' : ''}" onclick="keInlineSlide(${idx})"></button>`).join('');
         document.getElementById('btnPrevInline').style.display = daftarIklan.length <= 1 ? 'none' : 'flex';
         document.getElementById('btnNextInline').style.display = daftarIklan.length <= 1 ? 'none' : 'flex';
         if (inlineSlideTimer) clearInterval(inlineSlideTimer);
@@ -1449,14 +1041,11 @@
       }
 
       const searchSectionPromo = document.getElementById('searchInlinePromoSection');
-      if (!hasIklan) {
-        if (searchSectionPromo) searchSectionPromo.style.display = 'none';
-      } else if (searchSectionPromo) {
+      if (!hasIklan) { if (searchSectionPromo) searchSectionPromo.style.display = 'none'; }
+      else if (searchSectionPromo) {
         searchSectionPromo.style.display = 'block';
-        const sTrack = document.getElementById('searchInlinePromoTrack');
-        const sDots = document.getElementById('searchInlinePromoDots');
-        sTrack.innerHTML = daftarIklan.map((item, idx) => `<div class="promo-slide" style="cursor:pointer;" onclick="initPromoSlider()"><div class="promo-ig-frame"><img src="${item.gambar}" alt="Poster ${idx + 1}" loading="lazy"></div></div>`).join('');
-        sDots.innerHTML = daftarIklan.map((_, idx) => `<button type="button" class="promo-dot ${idx === 0 ? 'active' : ''}" onclick="keSearchInlineSlide(${idx})"></button>`).join('');
+        document.getElementById('searchInlinePromoTrack').innerHTML = daftarIklan.map((item, idx) => `<div class="promo-slide" style="cursor:pointer;" onclick="initPromoSlider()"><div class="promo-ig-frame"><img src="${item.gambar}" alt="Poster ${idx + 1}" loading="lazy"></div></div>`).join('');
+        document.getElementById('searchInlinePromoDots').innerHTML = daftarIklan.map((_, idx) => `<button type="button" class="promo-dot ${idx === 0 ? 'active' : ''}" onclick="keSearchInlineSlide(${idx})"></button>`).join('');
         document.getElementById('btnPrevSearchInline').style.display = daftarIklan.length <= 1 ? 'none' : 'flex';
         document.getElementById('btnNextSearchInline').style.display = daftarIklan.length <= 1 ? 'none' : 'flex';
         if (searchInlineSlideTimer) clearInterval(searchInlineSlideTimer);
@@ -1465,16 +1054,13 @@
     }
 
     function keInlineSlide(index) {
-      const total = daftarIklan.length;
-      currentInlineSlide = (index + total) % total;
+      const total = daftarIklan.length; currentInlineSlide = (index + total) % total;
       document.getElementById('inlinePromoTrack').style.transform = `translateX(-${currentInlineSlide * 100}%)`;
       document.querySelectorAll('#inlinePromoDots .promo-dot').forEach((d, i) => d.classList.toggle('active', i === currentInlineSlide));
     }
     function geserInlineSlide(arah) { keInlineSlide(currentInlineSlide + arah); }
-
     function keSearchInlineSlide(index) {
-      const total = daftarIklan.length;
-      currentSearchInlineSlide = (index + total) % total;
+      const total = daftarIklan.length; currentSearchInlineSlide = (index + total) % total;
       document.getElementById('searchInlinePromoTrack').style.transform = `translateX(-${currentSearchInlineSlide * 100}%)`;
       document.querySelectorAll('#searchInlinePromoDots .promo-dot').forEach((d, i) => d.classList.toggle('active', i === currentSearchInlineSlide));
     }
@@ -1506,6 +1092,7 @@
     function roundRectPath(ctx, x, y, w, h, r) {
       ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
     }
+
     function drawDirectLogoOnCanvas(ctx, logoImg, leftX, centerY, maxW, maxH) {
       if (!logoImg || !logoImg.naturalWidth || !logoImg.naturalHeight) return 0;
       const ratio = Math.min(maxW / logoImg.naturalWidth, maxH / logoImg.naturalHeight);
@@ -1514,6 +1101,7 @@
       ctx.drawImage(logoImg, leftX, drawY, drawW, drawH); ctx.restore();
       return drawW;
     }
+
     function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
       const words = String(text || '-').split(' '); let line = '', lineCount = 0;
       for (let n = 0; n < words.length; n++) {
@@ -1526,104 +1114,183 @@
       }
       ctx.fillText(line.trim(), x, y); return y + lineHeight;
     }
-    function triggerCanvasDownload(canvas, filename) {
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/png');
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+
+    function tampilkanPreviewUnduhan(dataUrl, filename, titleLabel) {
+      let modal = document.getElementById('downloadPreviewModal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'downloadPreviewModal';
+        modal.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(10,26,17,0.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:18px;';
+        modal.innerHTML =
+          '<div style="position:relative;width:100%;max-width:390px;background:#14532d;border:1.5px solid rgba(254,240,138,0.7);border-radius:22px;padding:16px;text-align:center;color:#ffffff;box-shadow:0 24px 52px rgba(0,0,0,0.55);">' +
+            '<div id="dlPreviewTitle" style="font-size:14px;font-weight:700;color:#fef08a;margin-bottom:6px;"></div>' +
+            '<div style="font-size:11.5px;color:#dcfce7;margin-bottom:12px;line-height:1.4;">Tekan &amp; tahan gambar di bawah, lalu pilih <b>Simpan Gambar</b> ke galeri HP.</div>' +
+            '<img id="dlPreviewImg" src="" alt="Hasil Unduhan" style="width:100%;max-height:58vh;object-fit:contain;border-radius:14px;background:#ffffff;border:1px solid rgba(255,255,255,0.4);">' +
+            '<div style="display:flex;gap:8px;margin-top:12px;">' +
+              '<a id="dlPreviewLink" href="#" download="" style="flex:1;padding:10px;border-radius:12px;background:#fef08a;color:#14532d;font-size:12.5px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">Unduh File</a>' +
+              '<button type="button" onclick="document.getElementById(\'downloadPreviewModal\').style.display=\'none\'" style="flex:1;padding:10px;border-radius:12px;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.45);color:#ffffff;font-size:12.5px;font-weight:700;cursor:pointer;">Tutup</button>' +
+            '</div>' +
+          '</div>';
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) modal.style.display = 'none';
+        });
+        document.body.appendChild(modal);
+      }
+      document.getElementById('dlPreviewTitle').textContent = titleLabel || 'Gambar Siap Disimpan';
+      document.getElementById('dlPreviewImg').src = dataUrl;
+      const dlLink = document.getElementById('dlPreviewLink');
+      dlLink.href = dataUrl;
+      dlLink.download = filename;
+      modal.style.display = 'flex';
+    }
+
+    function triggerCanvasDownload(canvas, filename, titleLabel) {
+      const isInAppBrowser = /Instagram|FBAN|FBAV|WhatsApp|Line|BytedanceWebview|wv/i.test(navigator.userAgent || '');
+
+      try {
+        if (canvas.toBlob) {
+          canvas.toBlob(function(blob) {
+            if (!blob) {
+              tampilkanPreviewUnduhan(canvas.toDataURL('image/png'), filename, titleLabel);
+              return;
+            }
+            const blobUrl = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = filename;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            if (isInAppBrowser) {
+              tampilkanPreviewUnduhan(canvas.toDataURL('image/png'), filename, titleLabel);
+            }
+            setTimeout(function() { URL.revokeObjectURL(blobUrl); }, 10000);
+          }, 'image/png');
+        } else {
+          const dataUrl = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = dataUrl;
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          if (isInAppBrowser) {
+            tampilkanPreviewUnduhan(dataUrl, filename, titleLabel);
+          }
+        }
+      } catch (err) {
+        loadedLogoImage = null;
+      }
     }
 
     const CANVAS_FONT_ROUND = '"Arial Rounded MT Bold", "Nunito", "Varela Round", sans-serif';
 
-    async function unduhKodeQR() {
+    function unduhKartuPeserta() {
       if (!currentPeserta) return;
-      const logoImg = await ensureLogoLoaded();
-      const canvas = document.createElement('canvas'); canvas.width = 760; canvas.height = 960;
+      const logoImg = getReadyLogoImage();
+      const canvas = document.createElement('canvas'); canvas.width = 900; canvas.height = 1060;
       const ctx = canvas.getContext('2d');
-      const bgGrad = ctx.createLinearGradient(0, 0, 760, 960);
+      const bgGrad = ctx.createLinearGradient(0, 0, 900, 1060);
       bgGrad.addColorStop(0, '#e7f6ec'); bgGrad.addColorStop(0.5, '#f7fae8'); bgGrad.addColorStop(1, '#fef9c3');
-      ctx.fillStyle = bgGrad; ctx.fillRect(0, 0, 760, 960);
-      roundRectPath(ctx, 40, 40, 680, 880, 36); ctx.fillStyle = '#ffffff'; ctx.fill(); ctx.lineWidth = 4; ctx.strokeStyle = '#16a34a'; ctx.stroke();
-      ctx.save(); roundRectPath(ctx, 40, 40, 680, 155, 36); ctx.clip();
-      const headGrad = ctx.createLinearGradient(40, 40, 720, 195);
-      headGrad.addColorStop(0, '#14532d'); headGrad.addColorStop(0.55, '#15803d'); headGrad.addColorStop(1, '#ca8a04');
-      ctx.fillStyle = headGrad; ctx.fillRect(40, 40, 680, 155); ctx.restore();
-      const drawnLogoW = drawDirectLogoOnCanvas(ctx, logoImg, 72, 117, 110, 88);
-      if (drawnLogoW > 0) {
-        const textX = 72 + drawnLogoW + 18; ctx.textAlign = 'left';
-        ctx.fillStyle = '#fef08a'; ctx.font = 'bold 25px ' + CANVAS_FONT_ROUND; ctx.fillText('KODE QR PRESENSI KEHADIRAN', textX, 108);
-        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 20px ' + CANVAS_FONT_ROUND; ctx.fillText("GAMA'88 X FUNTASTICJS", textX, 146);
-      } else {
-        ctx.textAlign = 'center';
-        ctx.fillStyle = '#fef08a'; ctx.font = 'bold 28px ' + CANVAS_FONT_ROUND; ctx.fillText('KODE QR PRESENSI KEHADIRAN', 380, 106);
-        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 22px ' + CANVAS_FONT_ROUND; ctx.fillText("GAMA'88 X FUNTASTICJS", 380, 148);
-      }
-      roundRectPath(ctx, 165, 235, 430, 430, 26); ctx.fillStyle = '#f0fdf4'; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = '#86efac'; ctx.stroke();
-      const { size, grid } = QRGenerator.getMatrix(currentPeserta.noPeserta);
-      const cellSize = Math.floor(360 / size), actualQR = cellSize * size, startX = Math.floor((760 - actualQR) / 2), startY = Math.floor(235 + (430 - actualQR) / 2);
-      ctx.fillStyle = '#ffffff'; ctx.fillRect(startX - 16, startY - 16, actualQR + 32, actualQR + 32);
-      ctx.fillStyle = '#0f172a';
-      for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (grid[r][c]) ctx.fillRect(startX + c * cellSize, startY + r * cellSize, cellSize, cellSize);
-      ctx.textAlign = 'center'; ctx.fillStyle = '#14532d'; ctx.font = 'bold 34px "Courier New", monospace'; ctx.fillText(currentPeserta.noPeserta, 380, 730);
-      ctx.fillStyle = '#14281d'; ctx.font = 'bold 26px ' + CANVAS_FONT_ROUND; drawWrappedText(ctx, currentPeserta.nama.toUpperCase(), 380, 780, 600, 34, 2);
-      ctx.fillStyle = '#4d7c0f'; ctx.font = 'bold 20px ' + CANVAS_FONT_ROUND; ctx.fillText(currentPeserta.sekolah.toUpperCase(), 380, 862);
-      triggerCanvasDownload(canvas, 'QR_Presensi_' + String(currentPeserta.noPeserta || 'Peserta').replace(/[^a-zA-Z0-9_-]/g, '_') + '.png');
-    }
+      ctx.fillStyle = bgGrad; ctx.fillRect(0, 0, 900, 1060);
 
-    async function unduhKartuPeserta() {
-      if (!currentPeserta) return;
-      const logoImg = await ensureLogoLoaded();
-      const canvas = document.createElement('canvas'); canvas.width = 900; canvas.height = 1120;
-      const ctx = canvas.getContext('2d');
-      const bgGrad = ctx.createLinearGradient(0, 0, 900, 1120);
-      bgGrad.addColorStop(0, '#e7f6ec'); bgGrad.addColorStop(0.5, '#f7fae8'); bgGrad.addColorStop(1, '#fef9c3');
-      ctx.fillStyle = bgGrad; ctx.fillRect(0, 0, 900, 1120);
-      roundRectPath(ctx, 40, 40, 820, 1040, 36); ctx.fillStyle = '#ffffff'; ctx.fill(); ctx.lineWidth = 4; ctx.strokeStyle = '#16a34a'; ctx.stroke();
-      ctx.save(); roundRectPath(ctx, 40, 40, 820, 165, 36); ctx.clip();
-      const headGrad = ctx.createLinearGradient(40, 40, 860, 205);
-      headGrad.addColorStop(0, '#14532d'); headGrad.addColorStop(0.55, '#15803d'); headGrad.addColorStop(1, '#ca8a04');
-      ctx.fillStyle = headGrad; ctx.fillRect(40, 40, 820, 165); ctx.restore();
-      const drawnLogoW = drawDirectLogoOnCanvas(ctx, logoImg, 76, 122, 115, 92);
-      const textStartX = drawnLogoW > 0 ? (76 + drawnLogoW + 18) : 80;
-      ctx.textAlign = 'left'; ctx.fillStyle = '#fef08a'; ctx.font = 'bold 29px ' + CANVAS_FONT_ROUND; ctx.fillText('KARTU PESERTA UJIAN', textStartX, 112);
-      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 21px ' + CANVAS_FONT_ROUND; ctx.fillText("GAMA'88 X FUNTASTICJS", textStartX, 150);
-      roundRectPath(ctx, 620, 74, 205, 86, 18); ctx.fillStyle = 'rgba(20, 83, 45, 0.45)'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(254, 240, 138, 0.75)'; ctx.stroke();
-      ctx.textAlign = 'center'; ctx.fillStyle = '#fef08a'; ctx.font = 'bold 16px ' + CANVAS_FONT_ROUND; ctx.fillText('NO. PESERTA', 722, 104);
-      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 23px "Courier New", monospace'; ctx.fillText(currentPeserta.noPeserta, 722, 140);
+      roundRectPath(ctx, 40, 40, 820, 980, 36);
+      ctx.fillStyle = '#ffffff'; ctx.fill();
+      ctx.lineWidth = 4; ctx.strokeStyle = '#16a34a'; ctx.stroke();
 
-      function drawFieldBox(x, y, w, h, label, value, isHighlight, isMono) {
+      ctx.save();
+      roundRectPath(ctx, 40, 40, 820, 190, 36);
+      ctx.clip();
+      const headGrad = ctx.createLinearGradient(40, 40, 860, 230);
+      headGrad.addColorStop(0, '#14532d'); headGrad.addColorStop(0.55, '#15803d'); headGrad.addColorStop(1, '#ca8a04');
+      ctx.fillStyle = headGrad; ctx.fillRect(40, 40, 820, 190);
+      ctx.restore();
+
+      const drawnLogoW = drawDirectLogoOnCanvas(ctx, logoImg, 66, 135, 355, 148);
+      const textStartX = drawnLogoW > 0 ? (66 + drawnLogoW + 20) : 80;
+      const titleAvailW = 834 - textStartX;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#fef08a'; ctx.font = 'bold 27px ' + CANVAS_FONT_ROUND;
+      ctx.fillText('KARTU PESERTA UJIAN', textStartX, 123);
+      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 19px ' + CANVAS_FONT_ROUND;
+      drawWrappedText(ctx, "GAMA'88 X FUNTASTICJS", textStartX, 158, titleAvailW, 24, 2);
+
+      function drawFieldBox(x, y, w, h, label, value, isHighlight, isMono, customFontSize) {
         roundRectPath(ctx, x, y, w, h, 20);
         if (isHighlight) {
-          const boxGrad = ctx.createLinearGradient(x, y, x + w, y + h); boxGrad.addColorStop(0, '#f0fdf4'); boxGrad.addColorStop(1, '#fefce8');
-          ctx.fillStyle = boxGrad; ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = '#4ade80'; ctx.stroke();
+          const boxGrad = ctx.createLinearGradient(x, y, x + w, y + h);
+          boxGrad.addColorStop(0, '#f0fdf4'); boxGrad.addColorStop(1, '#fefce8');
+          ctx.fillStyle = boxGrad; ctx.fill();
+          ctx.lineWidth = 2.5; ctx.strokeStyle = '#4ade80'; ctx.stroke();
         } else {
-          ctx.fillStyle = '#f8fafc'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#e2e8f0'; ctx.stroke();
+          ctx.fillStyle = '#f8fafc'; ctx.fill();
+          ctx.lineWidth = 2; ctx.strokeStyle = '#e2e8f0'; ctx.stroke();
         }
-        ctx.textAlign = 'left'; ctx.fillStyle = '#64748b'; ctx.font = 'bold 17px ' + CANVAS_FONT_ROUND; ctx.fillText(label, x + 24, y + 36);
-        ctx.fillStyle = '#14532d'; ctx.font = isMono ? 'bold 30px "Courier New", monospace' : 'bold 26px ' + CANVAS_FONT_ROUND;
-        drawWrappedText(ctx, value, x + 24, y + 76, w - 48, 32, 2);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#64748b'; ctx.font = 'bold 16px ' + CANVAS_FONT_ROUND;
+        ctx.fillText(label, x + 22, y + 32);
+        const fSize = customFontSize || (isMono ? 30 : 25);
+        ctx.fillStyle = '#14532d';
+        ctx.font = isMono ? ('bold ' + fSize + 'px "Courier New", monospace') : ('bold ' + fSize + 'px ' + CANVAS_FONT_ROUND);
+        drawWrappedText(ctx, value, x + 22, y + 68, w - 44, 28, 2);
       }
 
-      const lokasiRuang = currentPeserta.lantai + ' — ' + currentPeserta.ruang;
-      const sesiRuang = currentPeserta.sesi + ' • ' + lokasiRuang;
-      drawFieldBox(80, 240, 740, 115, 'NAMA PESERTA', currentPeserta.nama.toUpperCase(), false, false);
-      drawFieldBox(80, 375, 740, 115, 'ASAL SEKOLAH', currentPeserta.sekolah.toUpperCase(), false, false);
-      drawFieldBox(80, 510, 740, 115, 'SESI & RUANG UJIAN', sesiRuang, false, false);
-      drawFieldBox(80, 645, 355, 115, 'USERNAME', currentPeserta.username || '-', true, true);
-      drawFieldBox(465, 645, 355, 115, 'PASSWORD', currentPeserta.password || '-', true, true);
+      const noPesertaStr = String(currentPeserta.noPeserta || '-');
+      const lokasiRuang = String(currentPeserta.lantai || '-') + ' — ' + String(currentPeserta.ruang || '-');
+      const sesiRuang = String(currentPeserta.sesi || '-') + ' • ' + lokasiRuang;
 
-      roundRectPath(ctx, 80, 795, 740, 240, 22); ctx.fillStyle = '#f0fdf4'; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#86efac'; ctx.stroke();
-      const { size, grid } = QRGenerator.getMatrix(currentPeserta.noPeserta);
-      const cell = Math.floor(175 / size), actualMini = cell * size, qrX = 112, qrY = Math.floor(795 + (240 - actualMini) / 2);
-      ctx.fillStyle = '#ffffff'; ctx.fillRect(qrX - 10, qrY - 10, actualMini + 20, actualMini + 20);
+      // Kolom Kiri: Nama Peserta -> Nomor Peserta -> Asal Sekolah
+      drawFieldBox(80, 260, 465, 108, 'NAMA PESERTA', String(currentPeserta.nama || '-').toUpperCase(), false, false, 22);
+      drawFieldBox(80, 384, 465, 96, 'NO. PESERTA', noPesertaStr, true, true, 26);
+      drawFieldBox(80, 496, 465, 108, 'ASAL SEKOLAH', String(currentPeserta.sekolah || '-').toUpperCase(), false, false, 22);
+
+      // Kolom Kanan: Kode QR Presensi
+      roundRectPath(ctx, 565, 260, 255, 344, 20);
+      ctx.fillStyle = '#f0fdf4'; ctx.fill();
+      ctx.lineWidth = 2.5; ctx.strokeStyle = '#4ade80'; ctx.stroke();
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#15803d'; ctx.font = 'bold 15px ' + CANVAS_FONT_ROUND;
+      ctx.fillText('QR PRESENSI', 692.5, 293);
+
+      const { size, grid } = QRGenerator.getMatrix(noPesertaStr);
+      const cell = Math.floor(184 / size);
+      const actualMini = cell * size;
+      const qrX = Math.floor(565 + (255 - actualMini) / 2);
+      const qrY = Math.floor(310 + (245 - actualMini) / 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(qrX - 12, qrY - 12, actualMini + 24, actualMini + 24);
       ctx.fillStyle = '#0f172a';
-      for (let r = 0; r < size; r++) for (let c = 0; c < size; c++) if (grid[r][c]) ctx.fillRect(qrX + c * cell, qrY + r * cell, cell, cell);
-      ctx.textAlign = 'left'; ctx.fillStyle = '#14532d'; ctx.font = 'bold 23px ' + CANVAS_FONT_ROUND; ctx.fillText('KODE QR PRESENSI & AKUN CBT', 325, 855);
-      ctx.fillStyle = '#3f6212'; ctx.font = 'bold 18px ' + CANVAS_FONT_ROUND;
-      drawWrappedText(ctx, 'Simpan kartu ini di galeri HP. Tunjukkan Kode QR kepada panitia saat masuk ruangan dan gunakan Username & Password di atas untuk login ujian.', 325, 895, 465, 28, 4);
-      triggerCanvasDownload(canvas, 'Kartu_Peserta_' + String(currentPeserta.nama || 'Peserta').trim().replace(/[^a-zA-Z0-9_-]/g, '_') + '.png');
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          if (grid[r][c]) ctx.fillRect(qrX + c * cell, qrY + r * cell, cell, cell);
+        }
+      }
+
+      ctx.fillStyle = '#166534'; ctx.font = 'bold 13px ' + CANVAS_FONT_ROUND;
+      ctx.fillText('Scan saat registrasi', 692.5, 582);
+
+      // Baris Tengah: Sesi & Ruang Ujian
+      drawFieldBox(80, 624, 740, 106, 'SESI & RUANG UJIAN', sesiRuang, false, false, 24);
+
+      // Baris Akun: Username & Password
+      drawFieldBox(80, 748, 355, 110, 'USERNAME', String(currentPeserta.username || '-'), true, true, 30);
+      drawFieldBox(465, 748, 355, 110, 'PASSWORD', String(currentPeserta.password || '-'), true, true, 30);
+
+      // Baris Bawah: Petunjuk Singkat
+      roundRectPath(ctx, 80, 876, 740, 108, 20);
+      ctx.fillStyle = '#f0fdf4'; ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = '#86efac'; ctx.stroke();
+
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#14532d'; ctx.font = 'bold 18px ' + CANVAS_FONT_ROUND;
+      ctx.fillText('PETUNJUK PRESENSI & AKUN CBT', 106, 911);
+      ctx.fillStyle = '#3f6212'; ctx.font = 'bold 16px ' + CANVAS_FONT_ROUND;
+      drawWrappedText(ctx, 'Simpan kartu ini di galeri HP. Tunjukkan Kode QR di atas kepada panitia saat masuk ruangan dan gunakan Username & Password untuk login ujian.', 106, 941, 688, 24, 2);
+
+      triggerCanvasDownload(canvas, 'Kartu_Peserta_' + String(currentPeserta.nama || 'Peserta').trim().replace(/[^a-zA-Z0-9_-]/g, '_') + '.png', 'Kartu Peserta Ujian');
     }
 
     let allPeserta = [], filteredSiswa = [];
@@ -1634,23 +1301,89 @@
     const selectSiswa = document.getElementById('selectSiswa');
     const btnCek = document.getElementById('btnCek');
 
-    function terapkanDataDariServer(res) {
+    function simpanCacheBrowser(dataObj) {
+      try {
+        localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({
+          savedAt: Date.now(),
+          data: dataObj
+        }));
+      } catch (e) {
+        try {
+          const slimData = Object.assign({}, dataObj, {
+            logoDataUri: '',
+            logoLightDataUri: ''
+          });
+          localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({
+            savedAt: Date.now(),
+            data: slimData
+          }));
+        } catch (err) {}
+      }
+    }
+
+    function bacaCacheBrowser() {
+      try {
+        const raw = localStorage.getItem(CACHE_STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !parsed.data || !parsed.savedAt) return null;
+        if (Date.now() - parsed.savedAt > CACHE_MAX_AGE_MS) {
+          localStorage.removeItem(CACHE_STORAGE_KEY);
+          return null;
+        }
+        return parsed;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function terapkanDataPortal(res, dariCache) {
       if (!res) return;
-      SERVER_INIT_DATA = Object.assign({}, SERVER_INIT_DATA, res, { webAppUrl: window.location.href });
+      SERVER_INIT_DATA = Object.assign(SERVER_INIT_DATA, res);
       initLogoFromServer();
       initRunningText();
 
       if (res.iklan && res.iklan.length > 0) {
+        const iklanBaruStr = JSON.stringify(res.iklan);
+        const iklanLamaStr = JSON.stringify(daftarIklan);
         daftarIklan = res.iklan;
-        initPromoSlider();
-        initInlinePromoSlider();
+        if (dariCache || iklanBaruStr !== iklanLamaStr) {
+          if (document.getElementById('promoModal').style.display !== 'flex') {
+            initPromoSlider();
+          }
+          initInlinePromoSlider();
+        }
       }
 
-      allPeserta = Array.isArray(res.peserta) ? res.peserta : [];
-      populateSekolah();
+      if (Array.isArray(res.peserta)) {
+        const belumPilihSekolah = !selectSekolah.value;
+        allPeserta = res.peserta;
+        if (belumPilihSekolah) {
+          populateSekolah();
+        }
+      }
     }
 
-    async function muatDataDariAppsScript() {
+    function fetchDenganRetry(url, percobaan) {
+      return fetch(url)
+        .then(function(response) {
+          if (!response.ok) throw new Error('HTTP ' + response.status);
+          return response.json();
+        })
+        .catch(function(err) {
+          if (percobaan > 1) {
+            const jeda = (4 - percobaan) * 700 + Math.floor(Math.random() * 400);
+            return new Promise(function(resolve) {
+              setTimeout(resolve, jeda);
+            }).then(function() {
+              return fetchDenganRetry(url, percobaan - 1);
+            });
+          }
+          throw err;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
       initRunningText();
 
       if (!GAS_API_URL || GAS_API_URL.indexOf('PASTE_URL_WEB_APP') !== -1 || GAS_API_URL.indexOf('http') !== 0) {
@@ -1658,28 +1391,39 @@
         return;
       }
 
-      const apiUrl = GAS_API_URL + (GAS_API_URL.indexOf('?') === -1 ? '?mode=json' : '&mode=json');
+      const forceRefresh = window.location.search.indexOf('refresh=1') !== -1;
+      const cached = bacaCacheBrowser();
+      let perluFetchServer = true;
 
-      try {
-        const resp = await fetch(apiUrl, { method: 'GET', redirect: 'follow' });
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        const data = await resp.json();
-        terapkanDataDariServer(data);
-      } catch (err) {
-        console.error('Gagal mengambil data dari Apps Script:', err);
-        selectSekolah.innerHTML = '<option value="">Gagal memuat data. Muat ulang halaman.</option>';
+      if (cached && cached.data) {
+        terapkanDataPortal(cached.data, true);
+        if (!forceRefresh && (Date.now() - cached.savedAt < CACHE_FRESH_MS)) {
+          perluFetchServer = false;
+        }
       }
-    }
 
-    document.addEventListener('DOMContentLoaded', function() {
-      muatDataDariAppsScript();
+      if (!perluFetchServer) return;
+
+      const apiUrl = GAS_API_URL + (GAS_API_URL.indexOf('?') === -1 ? '?mode=json' : '&mode=json');
+      fetchDenganRetry(apiUrl, 3)
+        .then(function(res) {
+          if (res) {
+            simpanCacheBrowser(res);
+            terapkanDataPortal(res, false);
+          }
+        })
+        .catch(function() {
+          if (!cached || !cached.data) {
+            selectSekolah.innerHTML = '<option value="">Gagal memuat data (Muat ulang halaman)</option>';
+          }
+        });
     });
 
     function populateSekolah() {
       const sekolahList = Array.from(new Set(allPeserta.map(i => String(i.sekolah || '').toUpperCase())))
         .filter(s => s && s !== LABEL_TANPA_SEKOLAH)
         .sort((a, b) => a.localeCompare(b));
-      selectSekolah.innerHTML = '<option value="">-- Pilih Asal Sekolah --</option>';
+      selectSekolah.innerHTML = '<option value="">Pilih Asal Sekolah</option>';
       sekolahList.forEach(s => {
         const opt = document.createElement('option');
         opt.value = s; opt.textContent = s;
@@ -1694,9 +1438,9 @@
     selectSekolah.addEventListener('change', function() {
       const chosen = this.value;
       btnCek.disabled = true;
-      if (!chosen) { selectSiswa.innerHTML = '<option value="">-- Pilih Nama Siswa --</option>'; selectSiswa.disabled = true; return; }
+      if (!chosen) { selectSiswa.innerHTML = '<option value="">Pilih Nama Siswa</option>'; selectSiswa.disabled = true; return; }
       filteredSiswa = allPeserta.filter(i => String(i.sekolah || '').toUpperCase() === chosen.toUpperCase()).sort((a, b) => a.nama.localeCompare(b.nama));
-      selectSiswa.innerHTML = '<option value="">-- Pilih Nama Siswa --</option>';
+      selectSiswa.innerHTML = '<option value="">Pilih Nama Siswa</option>';
       filteredSiswa.forEach((s, idx) => {
         const opt = document.createElement('option');
         opt.value = idx; opt.textContent = String(s.nama || '').toUpperCase();
@@ -1739,7 +1483,7 @@
     document.getElementById('btnReset').addEventListener('click', function() {
       currentPeserta = null;
       selectSekolah.value = '';
-      selectSiswa.innerHTML = '<option value="">-- Pilih Nama Siswa --</option>';
+      selectSiswa.innerHTML = '<option value="">Pilih Nama Siswa</option>';
       selectSiswa.disabled = true;
       btnCek.disabled = true;
       resultSection.style.display = 'none';
