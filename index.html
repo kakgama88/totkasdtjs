@@ -114,19 +114,16 @@
     }
 
     .sticky-logo-wrap {
-      display: flex;
-      align-items: center;
-      flex: 1 1 auto;
-      min-width: 0;
+      display: block;
+      flex: 0 0 auto;
       margin-right: auto;
-      overflow: visible;
     }
 
     .sticky-logo-img {
       display: none;
       height: 40px;
-      width: auto;
-      max-width: 100%;
+      width: 160px;
+      max-width: calc(100vw - 112px);
       object-fit: contain;
       object-position: left center;
       border-radius: 0;
@@ -688,7 +685,7 @@
     // TEMPELKAN URL WEB APP APPS SCRIPT (/exec) GAMA'88 X FUNTASTICJS DI SINI:
     // =========================================================================
     const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyKGHhggeehg1EWJc3nsd9HkKgq_zEXN-t9dvtAikPKBsquR1rT6IZKo3_Ph05cgo3-zQ/exec';
-    const CACHE_STORAGE_KEY = 'gama88_funtasticjs_cache_v2';
+    const CACHE_STORAGE_KEY = 'gama88_funtasticjs_cache_v3';
     const CACHE_FRESH_MS = 10 * 60 * 1000;
     const CACHE_MAX_AGE_MS = 12 * 60 * 60 * 1000;
 
@@ -836,16 +833,42 @@
       });
     }
 
+    function applyStickyLogoSizing(imgEl) {
+      if (!imgEl) return;
+      const targetH = 40;
+      const maxW = Math.max(120, Math.min(240, window.innerWidth - 112));
+      if (imgEl.naturalWidth > 0 && imgEl.naturalHeight > 0) {
+        const ratio = imgEl.naturalWidth / imgEl.naturalHeight;
+        const targetW = Math.min(maxW, Math.round(targetH * ratio));
+        imgEl.style.height = targetH + 'px';
+        imgEl.style.width = targetW + 'px';
+      } else {
+        imgEl.style.height = targetH + 'px';
+        imgEl.style.width = Math.min(maxW, 160) + 'px';
+      }
+      imgEl.style.display = 'block';
+    }
+
     function updateStickyLogoByTheme() {
       const stickyLogo = document.getElementById('stickyLogoImg');
       if (!stickyLogo) return;
       const isDark = document.body.classList.contains('dark-mode');
       const targetSrc = isDark ? logoDarkSrc : (logoLightSrc || logoDarkSrc);
       if (targetSrc) {
+        stickyLogo.onload = function() {
+          applyStickyLogoSizing(this);
+        };
         stickyLogo.src = targetSrc;
-        stickyLogo.style.display = 'block';
+        applyStickyLogoSizing(stickyLogo);
       }
     }
+
+    window.addEventListener('resize', function() {
+      const stickyLogo = document.getElementById('stickyLogoImg');
+      if (stickyLogo && stickyLogo.style.display !== 'none') {
+        applyStickyLogoSizing(stickyLogo);
+      }
+    });
 
     function applyTheme(isDark) {
       document.body.classList.toggle('dark-mode', isDark);
