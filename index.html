@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gama'88</title>
 
-  <link rel="icon" type="image/png" href="logo.png">
-  <link rel="apple-touch-icon" href="logo.png">
+  <link id="dynamicFavicon" rel="icon" type="image/png" href="logo.png">
+  <link id="dynamicAppleIcon" rel="apple-touch-icon" href="logo.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Informasi Ruangan Ujian - GAMA'88 X FUNTASTICJS">
   <meta property="og:description" content="Cek lokasi lantai, ruang ujian, kode QR presensi, dan unduh kartu peserta ujian.">
@@ -110,19 +110,27 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      min-height: 38px;
+      min-height: 40px;
+    }
+
+    .sticky-logo-wrap {
+      display: flex;
+      align-items: center;
+      flex: 1 1 auto;
+      min-width: 0;
+      margin-right: auto;
+      overflow: visible;
     }
 
     .sticky-logo-img {
       display: none;
       height: 40px;
       width: auto;
-      max-width: 220px;
-      aspect-ratio: auto !important;
-      object-fit: contain !important;
-      border-radius: 0 !important;
-      margin-right: auto;
-      background: transparent !important;
+      max-width: 100%;
+      object-fit: contain;
+      object-position: left center;
+      border-radius: 0;
+      background: transparent;
     }
 
     .wa-floating-btn {
@@ -375,7 +383,9 @@
 
   <div class="sticky-topbar no-print">
     <div class="sticky-topbar-inner">
-      <img id="stickyLogoImg" src="" alt="Logo" class="sticky-logo-img" onerror="this.style.display='none';">
+      <div class="sticky-logo-wrap">
+        <img id="stickyLogoImg" src="" alt="Logo" class="sticky-logo-img" onerror="this.style.display='none';">
+      </div>
 
       <button type="button" id="btnThemeToggle" class="ios-theme-switch" onclick="toggleTema()" aria-label="Ganti Tema Gelap atau Terang">
         <svg class="ios-switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -678,7 +688,7 @@
     // TEMPELKAN URL WEB APP APPS SCRIPT (/exec) GAMA'88 X FUNTASTICJS DI SINI:
     // =========================================================================
     const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbyKGHhggeehg1EWJc3nsd9HkKgq_zEXN-t9dvtAikPKBsquR1rT6IZKo3_Ph05cgo3-zQ/exec';
-    const CACHE_STORAGE_KEY = 'gama88_funtasticjs_cache_v1';
+    const CACHE_STORAGE_KEY = 'gama88_funtasticjs_cache_v2';
     const CACHE_FRESH_MS = 10 * 60 * 1000;
     const CACHE_MAX_AGE_MS = 12 * 60 * 60 * 1000;
 
@@ -797,7 +807,8 @@
     function buatVersiLogoModeTerang(srcUrl) {
       return new Promise(resolve => {
         if (!srcUrl) { resolve(''); return; }
-        const img = new Image(); img.crossOrigin = 'anonymous';
+        const img = new Image();
+        if (srcUrl.indexOf('data:') !== 0) img.crossOrigin = 'anonymous';
         img.onload = function() {
           try {
             const w = img.naturalWidth, h = img.naturalHeight;
@@ -830,7 +841,10 @@
       if (!stickyLogo) return;
       const isDark = document.body.classList.contains('dark-mode');
       const targetSrc = isDark ? logoDarkSrc : (logoLightSrc || logoDarkSrc);
-      if (targetSrc) { stickyLogo.src = targetSrc; stickyLogo.style.display = 'block'; }
+      if (targetSrc) {
+        stickyLogo.src = targetSrc;
+        stickyLogo.style.display = 'block';
+      }
     }
 
     function applyTheme(isDark) {
@@ -852,13 +866,24 @@
 
     function ensureLogoLoaded() {
       if (loadedLogoImage && loadedLogoImage.complete && loadedLogoImage.naturalWidth > 0) return;
-      const dataUri = logoDarkSrc || SERVER_INIT_DATA.logoDataUri || SERVER_INIT_DATA.logoUrl;
-      if (!dataUri) return;
+      const src = SERVER_INIT_DATA.logoDataUri || logoDarkSrc || SERVER_INIT_DATA.logoUrl;
+      if (!src) return;
       const imgObj = new Image();
-      imgObj.crossOrigin = 'anonymous';
+      if (src.indexOf('data:') !== 0) {
+        imgObj.crossOrigin = 'anonymous';
+      }
       imgObj.onload = () => { loadedLogoImage = imgObj; };
-      imgObj.onerror = () => { loadedLogoImage = null; };
-      imgObj.src = dataUri;
+      imgObj.onerror = () => {
+        if (src.indexOf('data:') !== 0) {
+          const fallbackImg = new Image();
+          fallbackImg.onload = () => { loadedLogoImage = fallbackImg; };
+          fallbackImg.onerror = () => { loadedLogoImage = null; };
+          fallbackImg.src = src;
+        } else {
+          loadedLogoImage = null;
+        }
+      };
+      imgObj.src = src;
     }
 
     function getReadyLogoImage() {
@@ -872,8 +897,16 @@
       const manualLightSrc = SERVER_INIT_DATA.logoLightDataUri || '';
       if (!rawDarkSrc && !manualLightSrc) return;
       logoDarkSrc = rawDarkSrc || manualLightSrc;
-      if (manualLightSrc) { logoLightSrc = manualLightSrc; updateStickyLogoByTheme(); }
-      else { buatVersiLogoModeTerang(logoDarkSrc).then(gen => { logoLightSrc = gen || logoDarkSrc; updateStickyLogoByTheme(); }); }
+      updateStickyLogoByTheme();
+      if (manualLightSrc) {
+        logoLightSrc = manualLightSrc;
+        updateStickyLogoByTheme();
+      } else {
+        buatVersiLogoModeTerang(logoDarkSrc).then(gen => {
+          logoLightSrc = gen || logoDarkSrc;
+          updateStickyLogoByTheme();
+        });
+      }
       ensureLogoLoaded();
     }
 
